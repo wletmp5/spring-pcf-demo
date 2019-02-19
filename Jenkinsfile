@@ -34,7 +34,7 @@ node {
               junit '**/target/surefire-reports/TEST-*.xml'
               archiveArtifacts 'target/*.jar'
               checkResult("There are test failures")
-          }
+          },
 
           "SonarQube analysis": {
               if (isUnix()) {
