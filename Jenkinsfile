@@ -1,7 +1,7 @@
 def checkResult(def message){
      if(currentBuild.result == 'SUCCESS'){
      }else {
-       error "FAIL: " + message + " currentBuild.result"
+       error "FAIL: " + message + " " + currentBuild.result
      }
 }
 
