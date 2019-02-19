@@ -28,7 +28,7 @@ node {
    }
 
    stages('Publish Reports') {
-      parallel{
+      parallel
 
           'Unit Tests': {
               junit '**/target/surefire-reports/TEST-*.xml'
@@ -45,7 +45,7 @@ node {
               checkResult("There are SonarQube test failures")
           }
 
-      }
+
    }
    stage('Deploy:Dev') {
 
