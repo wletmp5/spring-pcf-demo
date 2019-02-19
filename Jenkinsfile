@@ -24,13 +24,16 @@ node {
       }
       checkResult("Unable to build the project")
    }
+
    stage('Publish Reports') {
       parallel{
+
           stage('Unit Tests'){
               junit '**/target/surefire-reports/TEST-*.xml'
               archiveArtifacts 'target/*.jar'
               checkResult("There are test failures")
           }
+
           stage('SonarQube analysis'){
               if (isUnix()) {
                    sh "'${mvnHome}/bin/mvn' sonar:sonar"
@@ -39,8 +42,8 @@ node {
               }
               checkResult("There are SonarQube test failures")
           }
-      }
 
+      }
    }
    stage('Deploy:Dev') {
 
