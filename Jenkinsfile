@@ -3,7 +3,7 @@ def checkResult(def message){
       }else {
         error "FAIL: " + message
       }
-   }
+}
 
 node {
    def mvnHome
@@ -15,7 +15,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.
       mvnHome = tool 'M3'
-      checkResult("Unable to download project from the repo")
+      //checkResult("Unable to download project from the repo")
    }
    stage('Build') {
       // Run the maven build
