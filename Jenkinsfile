@@ -31,7 +31,7 @@ node {
 }
 
 timeout(time:5, unit:'DAYS') {
-    input message:'Approve deployment?', submitter: 'wletmp5'
+    input message:'Approve Production deployment?', submitter: 'wletmp5'
 }
 
 node{
