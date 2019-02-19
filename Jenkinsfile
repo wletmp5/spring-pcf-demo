@@ -1,13 +1,13 @@
-def checkResult(def message){
-      if(currentBuild.result == 'SUCCESS'){
-      }else {
-        error "FAIL: " + message
-      }
-}
+
 
 node {
    def mvnHome
-
+   def checkResult(def message){
+         if(currentBuild.result == 'SUCCESS'){
+         }else {
+           error "FAIL: " + message
+         }
+   }
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/wletmp5/spring-pcf-demo'
@@ -15,7 +15,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.
       mvnHome = tool 'M3'
-      //checkResult("Unable to download project from the repo")
+      checkResult("Unable to download project from the repo")
    }
    stage('Build') {
       // Run the maven build
