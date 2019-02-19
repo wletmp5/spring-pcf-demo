@@ -21,6 +21,11 @@ node {
       archiveArtifacts 'target/*.jar'
    }
    stage('Deploy:Dev') {
+     when {
+            expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS'
+            }
+     }
       // Run the maven build
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore cf:push"
