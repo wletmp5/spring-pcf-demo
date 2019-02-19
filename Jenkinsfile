@@ -27,7 +27,7 @@ node {
       checkResult("Unable to build the project")
    }
 
-   stages('Publish Reports') {
+   stage('Publish Reports') {
       parallel(
 
           "Unit Tests": {
