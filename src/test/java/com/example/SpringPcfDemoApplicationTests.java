@@ -11,7 +11,7 @@ public class SpringPcfDemoApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		assert false;
+		assert true;
 	}
 
 }
