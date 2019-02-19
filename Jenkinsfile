@@ -5,7 +5,7 @@ node {
    def checkResult(def message){
          if(currentBuild.result == 'SUCCESS'){
          }else {
-           error "FAIL: " + message
+           error "FAIL: " + message + " currentBuild.result"
          }
    }
    stage('Preparation') { // for display purposes
