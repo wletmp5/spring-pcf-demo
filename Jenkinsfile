@@ -19,13 +19,15 @@ node {
    stage('Unit Tests') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archiveArtifacts 'target/*.jar'
+
+      when {
+              expression {
+                  currentBuild.result == null || currentBuild.result == 'SUCCESS'
+              }
+      }
    }
    stage('Deploy:Dev') {
-     when {
-            expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS'
-            }
-     }
+
       // Run the maven build
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore cf:push"
