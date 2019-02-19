@@ -1,13 +1,13 @@
-
+def checkResult(def message){
+     if(currentBuild.result == 'SUCCESS'){
+     }else {
+       error "FAIL: " + message + " currentBuild.result"
+     }
+}
 
 node {
    def mvnHome
-   def checkResult(def message){
-         if(currentBuild.result == 'SUCCESS'){
-         }else {
-           error "FAIL: " + message + " currentBuild.result"
-         }
-   }
+
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/wletmp5/spring-pcf-demo'
