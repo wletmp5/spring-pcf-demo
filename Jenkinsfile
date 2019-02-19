@@ -20,10 +20,9 @@ node {
       junit '**/target/surefire-reports/TEST-*.xml'
       archiveArtifacts 'target/*.jar'
 
-      when {
-              expression {
-                  currentBuild.result == null || currentBuild.result == 'SUCCESS'
-              }
+      if(currentBuild.result == 'SUCCESS'){
+      }else {
+        error 'FAIL: There are test failures'
       }
    }
    stage('Deploy:Dev') {
