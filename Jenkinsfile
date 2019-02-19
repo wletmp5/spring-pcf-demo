@@ -1,5 +1,11 @@
 node {
    def mvnHome
+   def checkResult(def message){
+      if(currentBuild.result == 'SUCCESS'){
+      }else {
+        error "FAIL: " + message
+      }
+   }
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/wletmp5/spring-pcf-demo'
@@ -7,6 +13,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.
       mvnHome = tool 'M3'
+      checkResult("Unable to download project from the repo")
    }
    stage('Build') {
       // Run the maven build
@@ -15,15 +22,13 @@ node {
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
+      checkResult("Unable to build the project")
    }
    stage('Unit Tests') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archiveArtifacts 'target/*.jar'
+      checkResult("There are test failures")
 
-      if(currentBuild.result == 'SUCCESS'){
-      }else {
-        error 'FAIL: There are test failures'
-      }
    }
    stage('Deploy:Dev') {
 
