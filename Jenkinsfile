@@ -30,13 +30,13 @@ node {
    stages('Publish Reports') {
       parallel{
 
-          stage('Unit Tests'){
+          'Unit Tests': {
               junit '**/target/surefire-reports/TEST-*.xml'
               archiveArtifacts 'target/*.jar'
               checkResult("There are test failures")
           }
 
-          stage('SonarQube analysis'){
+          'SonarQube analysis': {
               if (isUnix()) {
                    sh "'${mvnHome}/bin/mvn' sonar:sonar"
               } else {
