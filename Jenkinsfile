@@ -69,6 +69,7 @@ timeout(time:5, unit:'DAYS') {
 }
 
 node{
+    mvnHome = tool 'M3'
     stage('Deploy:Prod'){
 
      if (isUnix()) {
