@@ -69,7 +69,7 @@ timeout(time:5, unit:'DAYS') {
 }
 
 node{
-    stage('Deploy:Prod')
+    stage('Deploy:Prod'){
 
      if (isUnix()) {
         sh "'${mvnHome}/bin/mvn' -Pproduction cf:push"
