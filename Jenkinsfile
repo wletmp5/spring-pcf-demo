@@ -5,6 +5,10 @@ def checkResult(def message){
      }
 }
 
+def deploy(){
+
+}
+
 node {
    def mvnHome
 
@@ -56,6 +60,7 @@ node {
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore cf:push/)
       }
+      checkResult("Unable to deploy to Development environment")
    }
 }
 
@@ -64,8 +69,13 @@ timeout(time:5, unit:'DAYS') {
 }
 
 node{
-    stage('Deploy:Prod') {
-      // Run the maven build
+    stage('Deploy:Prod')
 
+     if (isUnix()) {
+        sh "'${mvnHome}/bin/mvn' -Pproduction cf:push"
+        } else {
+           bat(/"${mvnHome}\bin\mvn" -Pproduction cf:push/)
+        }
+      checkResult("Unable to deploy to Production environment")
    }
 }
