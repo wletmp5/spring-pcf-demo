@@ -96,6 +96,39 @@
 				</sonar.host.url>
 			</properties>
 		</profile>
+
+		<profile>
+			<id>production</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.cloudfoundry</groupId>
+						<artifactId>cf-maven-plugin</artifactId>
+						<version>1.0.4</version>
+						<configuration>
+							<server>cloudfoundry-instance</server>
+							<target>http://api.run.pivotal.io</target>
+							<org>wletmp5</org>
+							<space>production</space>
+							<appname>spring-wletmp5-demo</appname>
+							<url>spring-wletmp5-demo-prod.cfapps.io</url>
+							<instances>3</instances>
+							<services>
+								<service>
+									<name>postgres-test</name>
+									<label>elephantsql</label>
+									<plan>turtle</plan>
+								</service>
+							</services>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 </project>
